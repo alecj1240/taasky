@@ -1,0 +1,63 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+
+// This is styling for navbar
+$navbar-height: 70px;
+$navbar-default-bg: white;
+
+
+.navbar-header .navbar-brand {
+	font-size: 28px;
+	color: #2ecc71;
+}
+
+.right-link {
+	font-size: 18px;
+}
+
+// This is general styling for components
+$jumbotron-bg: white;
+$btn-primary-bg: #2ecc71;
+$btn-primary-color: white;
+
+$table-border-color: white;
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
+
+// My own styling, that boostrap does not cover
+body {
+	margin: 0 auto;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	float: right;
+}
+
+.space-right {
+	margin-right: 20px;
+}
+
+.form-label {
+	font-family: "Droid Serif";
+	font-size: 16px;
+}
+
+// Page styling
+.page-title {
+	font-size: 48px;
+}
+
+// SIDEBAR SHOULD BE 10% WIDTH
+
+// Table Styling
+.tasks-table {
+	width: 80%;
+	margin: 0 auto;
+}

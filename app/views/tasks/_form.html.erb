@@ -1,0 +1,31 @@
+<%= form_for @task, :html => {class: "form-inline"} do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "err
+      or") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.label :name, class: "form-label sr-only" %><br>
+
+    <%= f.text_field :name, placeholder: "My Swag Task", class: "form-control" %>
+ 
+    <%= f.select(:duedate, @dates.collect {|d| [d.to_i,d.to_i]}, {:include_blank => "Due Date"}, {:class => "form-control"} ) %>
+
+    <%= f.select(:importance, @importance_options.collect {|o| [o.to_s,o.to_s]}, {:include_blank => "Importance"}, {:class => "form-control"} ) %>
+
+    <%= f.number_field :time, placeholder: "Minutes To Complete", class: "form-control" %>
+
+    <% if defined? @editpage %>
+      <%= f.submit "Edit Task", class: "btn btn-primary" %>
+    <% else %>
+      <%= f.submit "Create Task", class: "btn btn-primary" %>
+    <% end %>
+
+<% end %>

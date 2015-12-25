@@ -1,0 +1,13 @@
+<% if !user_signed_in? %>
+  <%= render 'pages/home' %>
+<% else %>
+
+  <h1 class="center page-title">My Tasks</h1>
+  
+  <div class="center">
+    <%= render 'form' %>
+  </div>
+
+  <%= render 'display_tasks' %>
+
+<% end %>

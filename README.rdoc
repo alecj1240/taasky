@@ -1,0 +1,8 @@
+== README
+
+* TAASKY
+
+* Taasky is a simple task manager,
+* it's the bare bones, just what you want
+
+* Hope you like it
