@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20151221194003) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "time"
-    t.integer  "duedate",    limit: 255
+    t.integer  "duedate"
     t.string   "importance"
   end
 

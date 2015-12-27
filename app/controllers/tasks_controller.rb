@@ -16,7 +16,10 @@ class TasksController < ApplicationController
   end
 
   def show
-    redirect_to root_path
+    @total_time = 0
+    @small_tasks = Task.where("time <= 20")
+    @medium_tasks = Task.where("time <= 45 AND time > 20")
+    @large_tasks = Task.where("time > 45")
   end
 
   def new
@@ -30,7 +33,7 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params)
     if @task.save
-      redirect_to @task, notice: "Task was successfully created"
+      redirect_to root_path, notice: "Task was successfully created"
     else
       render :new
     end
@@ -38,7 +41,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated'
+      redirect_to root_path, notice: 'Task was successfully updated'
     else 
       render :edit
     end
@@ -56,7 +59,7 @@ class TasksController < ApplicationController
 
     def correct_user
       @task = current_user.tasks.find_by(id: params[:id])
-      redirect_to tasks_path, notice: "Not authorized to edit this task" if @task.nil?
+      redirect_to root_path, notice: "Not authorized to edit this task" if @task.nil?
     end
 
     def task_params

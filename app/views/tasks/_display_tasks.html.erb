@@ -20,7 +20,8 @@
 
                 </td>
                 <td class="right">
-                  <span class="space-right">Time: <%= task.time %></span>                
+                  <span class="space-right">Time: <%= task.time %></span>
+                  <%= link_to "SHOW", task_path(task) %>                
                   <%= link_to edit_task_path(task) do %>
                     <span class="glyphicon glyphicon-edit"></span>
                     Edit
