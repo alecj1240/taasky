@@ -68,7 +68,14 @@
     <% end %>
   <% end %>
 <br /> <br />
-  <%= "TOTAL TIME: " + @total_time.to_s %>
+
+<%= "TOTAL TIME: " + @total_time.to_s %>
+
+<h4> Take A Lunch Break - 45 Min</h4>
+<% @total_time += 45 %>
+
+<%= "TOTAL TIME: " + @total_time.to_s %>
+
 
 
 
