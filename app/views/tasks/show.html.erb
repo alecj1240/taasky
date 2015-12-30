@@ -12,10 +12,12 @@
     <% @total_time += @small_tasks[small_array_counter].time %>
     <br />
   <% end %>
-
-  <% loop_counter += 1 %>
+ 
+  <% loop_counter+= 1 %>
   <% small_array_counter += 1 %>
 <% end %>
+
+<% loop_counter = 0 %>
 
 <% # if the task time + total time so far is less than 60 %>
 <% if @small_tasks[small_array_counter].time + @total_time < 60 %>
@@ -25,28 +27,24 @@
   <% @total_time += @small_tasks[small_array_counter].time %>
 <% end %>
 
-<p> Take A 10 Minute Break </p>
+<h5> Take A 10 Minute Break - 10 min </h5>
 <% @total_time += 10 %>
 
+<% loop_counter = 0 %>
 
+<% while loop_counter < 2 %>
   <% # if the X spot in the array is not nil %>
   <% if !@large_tasks[large_array_counter].nil? && @large_tasks[large_array_counter].time <= 120 %>
     <% # displaying the task name and time to the user %>
     <%= @large_tasks[large_array_counter].name + " - " + @large_tasks[large_array_counter].time.to_s + " min" %>
     <% # added the task time to the total time %>
     <% @total_time += @large_tasks[large_array_counter].time %>
-    <% # increase the large array counter %>
-    <% large_array_counter += 1 %>
     <br />
   <% end %>
 
-  <% # if the large task is there AND the large task time plus total is less than 180 (3 hours) %>
-  <% if !@large_tasks[large_array_counter].nil? && @large_tasks[large_array_counter].time + @total_time <= 190 %>
-    <% # displayinng the large task and the time %>
-    <%= @large_tasks[large_array_counter].name + " - " + @large_tasks[large_array_counter].time.to_s + " min" %>
-    <% # added the task time to total time %>
-    <% @total_time += @large_tasks[large_array_counter].time %>
-  <% end %>
+  <% large_array_counter += 1 %>
+  <% loop_counter += 1 %>
+<% end %> 
 
   <% # if the time is more than and less than %>
   <% if @total_time >= 145 && @total_time < 180 %>
@@ -56,6 +54,8 @@
       <%= @medium_tasks[medium_array_counter].name + " - " + @medium_tasks[medium_array_counter].time.to_s + " min" %>
       <% # adding the time from task to total time %>
       <% @total_time += @medium_tasks[medium_array_counter].time %>
+      <% # increaing the medium array counter %>
+      <% medium_array_counter += 1 %>
     <% end %>
   <% # if the total time is greater than 165 %>
   <% elsif @total_time >= 165 %>
@@ -65,19 +65,79 @@
       <% @small_tasks[small_array_counter].name + " - " + @small_tasks[small_array_counter].time.to_s + " min" %>
       <% # adding the time from task to total time %>
       <% @total_time += @small_tasks[small_array_counter].time %>
+      <% # increasing the small array counter %>
+      <% small_array_counter += 1 %>
     <% end %>
   <% end %>
 <br /> <br />
 
 <%= "TOTAL TIME: " + @total_time.to_s %>
 
-<h4> Take A Lunch Break - 45 Min</h4>
+<h5> Take A Lunch Break - 45 Min</h5>
 <% @total_time += 45 %>
 
 <%= "TOTAL TIME: " + @total_time.to_s %>
 
+<br />
 
+<% loop_counter = 0 %>
 
+  <% while loop_counter < 2 %>
+    <% # if the large task is there AND the large task time plus total is less than 180 (3 hours) %>
+    <% if !@large_tasks[large_array_counter].nil? %>
+      <% # displayinng the large task and the time %>
+      <%= @large_tasks[large_array_counter].name + " - " + @large_tasks[large_array_counter].time.to_s + " min" %>
+      <% # added the task time to total time %>
+      <% @total_time += @large_tasks[large_array_counter].time %>
+    <% end %>
 
+    <% loop_counter += 1 %>
+    <% large_array_counter += 1 %>
+  <% end %>
 
+  <% loop_counter = 0 %>
 
+  <% while loop_counter < 4 %>
+    <% # if the X spot in the array is not nil %>
+    <% if !@medium_tasks[medium_array_counter].nil? %>
+      <% # displaying the task name and time to the user %>
+      <%= @medium_tasks[medium_array_counter].name + " - " + @medium_tasks[medium_array_counter].time.to_s + " min" %>
+      <% # added the task time to the total time %>
+      <% @total_time += @medium_tasks[medium_array_counter].time %>
+      <br />
+    <% end %>
+
+    <% loop_counter += 1 %>
+    <% medium_array_counter += 1 %>
+  <% end %>
+
+  <% loop_counter = 0 %>
+
+  <% while loop_counter < 2 %>
+    <% # if the large task is there AND the large task time plus total is less than 180 (3 hours) %>
+    <% if !@large_tasks[large_array_counter].nil? %>
+      <% # displayinng the large task and the time %>
+      <%= @large_tasks[large_array_counter].name + " - " + @large_tasks[large_array_counter].time.to_s + " min" %>
+      <% # added the task time to total time %>
+      <% @total_time += @large_tasks[large_array_counter].time %>
+    <% end %>
+
+    <% loop_counter += 1 %>
+    <% large_array_counter += 1 %>
+  <% end %>
+
+  <% while loop_counter < 5 %>
+  <% # if the X spot in the array is not nil %>
+  <% if !@small_tasks[small_array_counter].nil? %>
+    <% # displaying the task name and time to the user %>
+    <%= @small_tasks[small_array_counter].name + " - " + @small_tasks[small_array_counter].time.to_s + " min" %>
+    <% # added the task time to the total time %>
+    <% @total_time += @small_tasks[small_array_counter].time %>
+    <br />
+  <% end %>
+ 
+  <% loop_counter+= 1 %>
+  <% small_array_counter += 1 %>
+<% end %>
+
+<%= "TOTAL TIME: " + @total_time.to_s %>
