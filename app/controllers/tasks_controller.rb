@@ -17,9 +17,7 @@ class TasksController < ApplicationController
 
   def show
     @total_time = 0
-    @small_tasks = Task.where("time <= 20")
-    @medium_tasks = Task.where("time <= 45 AND time > 20")
-    @large_tasks = Task.where("time > 45")
+    
   end
 
   def new

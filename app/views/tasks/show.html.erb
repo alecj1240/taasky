@@ -1,3 +1,9 @@
+<% 
+@small_tasks = Task.where("time <= 20 AND duedate = '#{@task.duedate}'")
+@medium_tasks = Task.where("time <= 45 AND time > 20 AND duedate = '#{@task.duedate}'")
+@large_tasks = Task.where("time > 45 AND duedate = '#{@task.duedate}'")
+%>
+
 <h1 class="page-title center"> Day View </h1>
 
 <% small_array_counter = 0; medium_array_counter = 0; large_array_counter = 0 # the counters for what task to output %>
@@ -19,12 +25,14 @@
 
 <% loop_counter = 0 %>
 
-<% # if the task time + total time so far is less than 60 %>
-<% if @small_tasks[small_array_counter].time + @total_time < 60 %>
-  <% # displaying the task name and time to the user %>
-  <%= @small_tasks[small_array_counter].name + " - " + @small_tasks[small_array_counter].time.to_s + " min" %>
-  <% # added the task time to the total time %>
-  <% @total_time += @small_tasks[small_array_counter].time %>
+<% if !@small_tasks[small_array_counter].nil? %>
+  <% # if the task time + total time so far is less than 60 %>
+  <% if @small_tasks[small_array_counter].time + @total_time < 60 %>
+    <% # displaying the task name and time to the user %>
+    <%= @small_tasks[small_array_counter].name + " - " + @small_tasks[small_array_counter].time.to_s + " min" %>
+    <% # added the task time to the total time %>
+    <% @total_time += @small_tasks[small_array_counter].time %>
+  <% end %>
 <% end %>
 
 <h5> Take A 10 Minute Break - 10 min </h5>
@@ -71,12 +79,8 @@
   <% end %>
 <br /> <br />
 
-<%= "TOTAL TIME: " + @total_time.to_s %>
-
 <h5> Take A Lunch Break - 45 Min</h5>
 <% @total_time += 45 %>
-
-<%= "TOTAL TIME: " + @total_time.to_s %>
 
 <br />
 
@@ -89,6 +93,7 @@
       <%= @large_tasks[large_array_counter].name + " - " + @large_tasks[large_array_counter].time.to_s + " min" %>
       <% # added the task time to total time %>
       <% @total_time += @large_tasks[large_array_counter].time %>
+      <br />
     <% end %>
 
     <% loop_counter += 1 %>
@@ -126,6 +131,8 @@
     <% large_array_counter += 1 %>
   <% end %>
 
+  <% loop_counter = 0 %>
+
   <% while loop_counter < 5 %>
   <% # if the X spot in the array is not nil %>
   <% if !@small_tasks[small_array_counter].nil? %>
@@ -140,4 +147,8 @@
   <% small_array_counter += 1 %>
 <% end %>
 
-<%= "TOTAL TIME: " + @total_time.to_s %>
+
+
+
+
+
