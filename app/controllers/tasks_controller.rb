@@ -17,7 +17,6 @@ class TasksController < ApplicationController
 
   def show
     @total_time = 0
-    
   end
 
   def new

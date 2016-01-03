@@ -9,7 +9,7 @@
 <% small_array_counter = 0; medium_array_counter = 0; large_array_counter = 0 # the counters for what task to output %>
 <% loop_counter = 0 # a loop counter for the loops%>
 
-<% while loop_counter < 3 %>
+<% while @total_time < 70 %>
   <% # if the X spot in the array is not nil %>
   <% if !@small_tasks[small_array_counter].nil? %>
     <% # displaying the task name and time to the user %>
@@ -21,18 +21,6 @@
  
   <% loop_counter+= 1 %>
   <% small_array_counter += 1 %>
-<% end %>
-
-<% loop_counter = 0 %>
-
-<% if !@small_tasks[small_array_counter].nil? %>
-  <% # if the task time + total time so far is less than 60 %>
-  <% if @small_tasks[small_array_counter].time + @total_time < 60 %>
-    <% # displaying the task name and time to the user %>
-    <%= @small_tasks[small_array_counter].name + " - " + @small_tasks[small_array_counter].time.to_s + " min" %>
-    <% # added the task time to the total time %>
-    <% @total_time += @small_tasks[small_array_counter].time %>
-  <% end %>
 <% end %>
 
 <h5> Take A 10 Minute Break - 10 min </h5>
