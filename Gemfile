@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'bootstrap-sass'
 gem 'devise'
+gem 'jquery-ui-rails'
 
 group :development, :test do
 	gem 'sqlite3'

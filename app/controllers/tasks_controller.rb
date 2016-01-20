@@ -9,10 +9,11 @@ class TasksController < ApplicationController
     if user_signed_in?
       @task = current_user.tasks.build
     end
-    @dates = 1..31
-    @date = 0
-    @tasks = Task.where("duedate = @date")
+    @tasks = Task.where("user_id = ?", current_user)
     @importance_options = ["low", "medium", "high"]
+    @small_tasks = Array.new
+    @medium_tasks = Array.new
+    @large_tasks = Array.new
   end
 
   def show
@@ -25,6 +26,8 @@ class TasksController < ApplicationController
 
   def edit
     @editpage = true;
+    @dates = 1..31
+    @importance_options = ["low", "medium", "high"]
   end
 
   def create

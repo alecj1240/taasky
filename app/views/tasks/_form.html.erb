@@ -16,7 +16,7 @@
 
     <%= f.text_field :name, placeholder: "My Swag Task", class: "form-control" %>
  
-    <%= f.select(:duedate, @dates.collect {|d| [d.to_i,d.to_i]}, {:include_blank => "Due Date"}, {:class => "form-control"} ) %>
+    <%= f.text_field :duedate, class: "form-control", placeholder: "Select A Date" %>
 
     <%= f.select(:importance, @importance_options.collect {|o| [o.to_s,o.to_s]}, {:include_blank => "Importance"}, {:class => "form-control"} ) %>
 

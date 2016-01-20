@@ -1,52 +1,14 @@
-<div class="tasks-table">
-  <table class="table">
-    <tbody>
+<% # tasks to small, medium, large array %>
+<% @tasks.each do |task| %>
+    <% if task.time <= 20 %>
+      <% @small_tasks.push(task) %>
+    <% end %>
 
-    <% while @date < 31 %>
-      <% if !@tasks.empty? %>
+    <% if task.time > 20 && task.time <= 45 %>
+      <% @medium_tasks.push(task) %>
+    <% end %>
 
-        <td><%= "Date: " + @date.to_s %></td>
-
-        <% @tasks.each do |task| %>
-           
-          <% if current_user == task.user %>
-            <tr class="task-info">
-            
-                <td>
-                <%= link_to task, method: :delete do %>
-                    <span class="glyphicon glyphicon-ok"></span>
-                  <% end %>
-                  <%= task.name %>
-
-                </td>
-                <td class="right">
-                  <span class="space-right">Time: <%= task.time %></span>
-                  <%= link_to "SHOW", task_path(task) %>                
-                  <%= link_to edit_task_path(task) do %>
-                    <span class="glyphicon glyphicon-edit"></span>
-                    Edit
-                  <% end %>
-                  <%= link_to task, method: :delete, data: { confirm: "Are you really sure you want to do that?" } do %>
-
-                    <span class="glyphicon glyphicon-trash"></span>
-                    Delete
-                  <% end %>
-                </td>
-              </tr> 
-              <br>
-          <% end  # end of if statement %>
-        <% end # end of .each loop %>
-
-      <% else %>
-
-      <% end # end of .empty? if statement %>
-
-      <% @date += 1 %>
-      <% @tasks = Task.where("duedate = #{@date}") %>
-
-    <% end # end of while loop %>
-      
-
-    </tbody>
-  </table>
-</div>
+    <% if task.time > 45 %>
+      <% @large_tasks.push(task) %>
+    <% end %>
+<% end %> 
