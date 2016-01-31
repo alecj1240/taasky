@@ -9,11 +9,10 @@ class TasksController < ApplicationController
     if user_signed_in?
       @task = current_user.tasks.build
     end
-    @tasks = Task.where("user_id = ?", current_user)
+    @today_tasks = Task.where("user_id = ?", current_user).where("duedate = ?", Date.today)
+    @task_time = 0
+    @day_time_assign = 900
     @importance_options = ["low", "medium", "high"]
-    @small_tasks = Array.new
-    @medium_tasks = Array.new
-    @large_tasks = Array.new
   end
 
   def show

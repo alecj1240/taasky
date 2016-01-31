@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117195109) do
+ActiveRecord::Schema.define(version: 20160124231823) do
 
   create_table "tasks", force: true do |t|
     t.string   "name"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160117195109) do
     t.integer  "time"
     t.date     "duedate"
     t.string   "importance"
-    t.time     "day_time"
+    t.integer  "day_time"
   end
 
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
