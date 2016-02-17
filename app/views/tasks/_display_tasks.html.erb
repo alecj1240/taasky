@@ -1,22 +1,66 @@
-<% loop_counter = 1 %>
+<% loop_counter = 1 # self explanatory what this is %>
+
+<% 
+  # method to round up number for assigning tasks a time
+  def round_up(number)
+    divisor = 10**Math.log10(number).floor
+    i = number / divisor
+    remainder = number % divisor
+    if remainder == 0
+      i * divisor
+    else
+      (i + 1) * divisor
+    end
+  end
+%>
 
 <% # for each task today, and that is the user's own %>
 <% @today_tasks.each do |task| %>
   
   <% case loop_counter %>
-    <% when 1, 2, 3, 4 %>
+    <% when 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 %>
+
+    <% if @task_time + task.time >= 60 %>
+      <% # rounded up time = the next hour (eg. 1000, or 1100) %>
+      <% @rounded_up_time = round_up(@day_time_assign) %>
+      <% # the time before you move to the next hour, but add 40 %>
+      <% @day_time_assign = @day_time_assign + 40 %>
+      <% # number to subtract from the time to assign %>
+      <% @small_number = @rounded_up_time - @day_time_assign # 1000 - 955 = 5 %>
+      <% # time to assign a task %>
+      <% @day_time_assign = @rounded_up_time - @small_number # 1015 - 5 = 1010 %>
+      <% # resetting the task time %>
+      <% @task_time = 0 %>
+    <% end %>
 
       <% if task.time <= 20 %>
-        <% task.day_time = @day_time_assign %>
-        <%= task.name + " - " + task.day_time %>
-        
+
+        <% if @task_time == 0 && loop_counter != 1 %>
+          <% # assigning the task a time of day %>
+          <% task.day_time = @day_time_assign - 40 %>
+        <% else %>
+          <% # assigning the task a time of day %>
+          <% task.day_time = @day_time_assign %>
+        <% end %>
+        <% # adding time to the total task time %>
+        <% @task_time += task.time %>
+        <% # adding time to the day_time_assign variable %>
+        <% @day_time_assign += task.time %>
+        <% # display task and the time of day %>
+        <%= task.name + " - " + task.day_time.to_s + " - " + task.time.to_s %>
+       
+        <br />
       <% end %>
 
-    <% else %>
-      <%= task.inspect %>
+    
+  <% else %>
+    <%= task.inspect %>
   <% end %>
 
   <% loop_counter += 1 %>
 
 <% # end of today_tasks .each loop %>
 <% end %>
+
+<%= "Next Time To Assign: " + @day_time_assign.to_s %>
+
